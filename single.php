@@ -34,6 +34,46 @@
 </script>
 	<div <?php post_class( 'column animated fadeInUp text-center' ); ?>>
 		<?php the_content(); ?>
+		<?php
+			$author = get_post_meta( get_the_ID(), '_author_author', true );
+			$authorCard = get_post( $author );
+		?>
+		<div class="row">
+			<div class="small-12 medium-10 medium-offset-1 columns">
+	<div class="column card-profile-stats">
+		<div class="row align-middle">
+			<div class="small-12 medium-3 columns text-center">
+				<img class="avatar-img" src="<?php echo get_the_post_thumbnail_url( $authorCard->ID, 'sub' ); ?>" alt="profile-image" />
+				<h5><?php echo $authorCard->post_title; ?></h5>
+				<?php $job = get_post_meta( $author, '_teamInfo_job', true ); if( $job != '' ) { ?>
+				<p><small><?php echo $job; ?></small></p>
+				<?php } ?>
+			</div>
+			<div class="small-12 medium-9 columns">
+				<div class="profile-desc">
+					<?php $output =  apply_filters( 'the_content', $authorCard->post_content ); echo $output; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+				<!--div class="card-profile-stats">
+					<div class="card-profile-stats-intro">
+						<img class="card-profile-stats-intro-pic" src="<?php echo get_the_post_thumbnail_url( $authorCard->ID, 'sub' ); ?>" alt="profile-image" />
+						<div class="card-profile-stats-intro-content">
+							<h5><?php echo $authorCard->post_title; ?></h5>
+							<p><small><?php $job = get_post_meta( $author, '_teamInfo_job', true ); echo $job; ?></small></p>
+						</div>
+					</div>
+					<hr />
+					<div class="card-profile-stats-container">
+						<div class="card-profile-stats-statistic">
+							<?php $output =  apply_filters( 'the_content', $authorCard->post_content ); echo $output; ?>
+						</div>
+					</div>
+				</div-->
+			</div>
+		</div>
+
 	</div>
 
 	<?php endwhile; ?>

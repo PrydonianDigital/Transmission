@@ -19,23 +19,24 @@
 	}
 	add_action( 'after_setup_theme', 'ta_theme' );
 
-add_filter( 'wp_audio_shortcode_library', 'jmc_new_lib' );
-add_filter( 'wp_video_shortcode_library', 'jmc_new_lib' );
-function jmc_new_lib(){
-    // Because we still want the script to load but not the styles
-    wp_enqueue_script( 'wp-mediaelement' );
-    wp_script_add_data( 'wp-mediaelement', 'conditional', 'lt IE 9' );
-    return '';
-}
+	add_filter( 'wp_audio_shortcode_library', 'jmc_new_lib' );
+	add_filter( 'wp_video_shortcode_library', 'jmc_new_lib' );
+	function jmc_new_lib(){
+		wp_enqueue_script( 'wp-mediaelement' );
+		wp_script_add_data( 'wp-mediaelement', 'conditional', 'lt IE 9' );
+		return '';
+	}
 
 	// Register Style
 	function ta_css() {
 		wp_register_style( 'grid', get_template_directory_uri() . '/css/foundation.min.css', false, '6.3.1' );
-		wp_register_style( 'mont', '//fonts.googleapis.com/css?family=Montserrat:400,500,700', false, '6.3.1' );
+		wp_register_style( 'transmission', get_template_directory_uri() . '/css/transmission.css', false, '6.3.1' );
 		wp_register_style( 'animate', '//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css', false, '6.3.1' );
+		wp_register_style( 'mi', '//fonts.googleapis.com/icon?family=Material+Icons', false, '6.3.1' );
 		wp_enqueue_style( 'grid' );
-		wp_enqueue_style( 'mont' );
+		wp_enqueue_style( 'transmission' );
 		wp_enqueue_style( 'animate' );
+		wp_enqueue_style( 'mi' );
 		wp_enqueue_style( 'wp-mediaelement' );
 	}
 	add_action( 'wp_enqueue_scripts', 'ta_css' );
@@ -44,19 +45,15 @@ function jmc_new_lib(){
 	function ta_js() {
 		wp_enqueue_script( 'what', get_template_directory_uri() . '/js/vendor/what-input.js', false, '6.3.1', true );
 		wp_enqueue_script( 'foundation', get_template_directory_uri() . '/js/vendor/foundation.min.js', false, '6.3.1', true );
-		wp_enqueue_script( 'fontawesome', '//use.fontawesome.com/bfa003177d.js', false, '4.7.0', false );
-		wp_enqueue_script( 'paroller', get_template_directory_uri() . '/js/vendor/paroller.js', false, '6.3.1', true );
 		wp_enqueue_script( 'gmap', '//maps.googleapis.com/maps/api/js?key=AIzaSyAtosHbPDMaai_Xx06b9umEgmgeNSfWgM8&libraries=places', false, '6.4.4', true );
 		wp_enqueue_script( 'SM', get_template_directory_uri() . '/js/ScrollMagic.min.js', false, '1', true );
 		wp_enqueue_script( 'TM', get_template_directory_uri() . '/js/plugins/TweenMax.min.js', false, '1', true );
 		wp_enqueue_script( 'AG', get_template_directory_uri() . '/js/plugins/animation.gsap.min.js', false, '1', true );
 		wp_enqueue_script( 'SVG', get_template_directory_uri() . '/js/plugins/DrawSVGPlugin.min.js', false, '1', true );
-		wp_enqueue_script( 'ta', get_template_directory_uri() . '/js/app.js', false, '1', true );
+		wp_enqueue_script( 'ta', get_template_directory_uri() . '/js/transmission.js', false, '1.5', true );
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_script( 'what' );
 		wp_enqueue_script( 'foundation' );
-		wp_enqueue_script( 'fontawesome' );
-		wp_enqueue_script( 'paroller' );
 		wp_enqueue_script( 'gmap' );
 		wp_enqueue_script( 'SM' );
 		wp_enqueue_script( 'TW' );
@@ -82,9 +79,25 @@ function jmc_new_lib(){
 
 	function ta_sidebars() {
 		$args = array(
-			'id'			=> 'footer',
+			'id'			=> 'footer1',
 			'class'		 => 'menu vertical',
-			'name'		  => __( 'Footer Widgets', 'ta' ),
+			'name'		  => __( 'Footer 1 Widgets', 'ta' ),
+			'before_title'  => '<h5>',
+			'after_title'   => '</h5>',
+		);
+		register_sidebar( $args );
+		$args = array(
+			'id'			=> 'footer2',
+			'class'		 => 'menu vertical',
+			'name'		  => __( 'Footer 2 Widgets', 'ta' ),
+			'before_title'  => '<h5>',
+			'after_title'   => '</h5>',
+		);
+		register_sidebar( $args );
+		$args = array(
+			'id'			=> 'footer3',
+			'class'		 => 'menu vertical',
+			'name'		  => __( 'Footer 3 Widgets', 'ta' ),
 			'before_title'  => '<h5>',
 			'after_title'   => '</h5>',
 		);
@@ -366,6 +379,13 @@ function jmc_new_lib(){
 		$labels->search_items = 'Search Insights';
 		$labels->not_found = 'No Insights found';
 		$labels->not_found_in_trash = 'No Insights found in Trash';
+	}
+
+	function user_the_categories() {
+	    global $cats;
+	    $cats = get_the_category();
+	    echo $cats[0]->cat_name;
+	    for ($i = 1; $i < count($cats); $i++) {echo ', ' . $cats[$i]->cat_name ;}
 	}
 
 	add_filter( 'disable_wpseo_json_ld_search', '__return_true' );

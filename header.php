@@ -2,12 +2,12 @@
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <?php wp_head(); ?>
 <link rel="stylesheet" type="text/css" href="<?php bloginfo('stylesheet_url'); ?>" />
 <?php
-	$ga = get_theme_mod( 'bst_ga' );
+	$ga = get_theme_mod( 'ta_ga' );
 	if($ga != '') {
 ?>
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $ga; ?>"></script>
@@ -23,6 +23,8 @@
 <?php
 	}
 	global $post;
+	require_once 'Mobile_Detect.php';
+	$detect = new Mobile_Detect;
 ?>
 </head>
 
@@ -60,6 +62,7 @@
 					<div class="wp-custom-header">
 						<img src="<?php echo get_theme_mod( 'ta_header_img' ); ?>" />
 						<?php
+							if( $detect->isMobile() && !$detect->isTablet() ){} else {
 							if( get_theme_mod( 'ta_header_video' ) != '' ) {
 						?>
 						<video poster="<?php echo get_theme_mod( 'ta_header_img' ); ?>" autoplay="autoplay" preload="metadata" loop="loop" muted="muted" controls="none" id="headerVid">
@@ -69,15 +72,16 @@
 							}
 							if( get_theme_mod( 'ta_yt_vid' ) != '' ) {
 						?>
-						<iframe id="player" type="text/html" width="640" height="390" src="http://www.youtube.com/embed/<?php echo get_theme_mod( 'ta_yt_vid' ); ?>?rel=0&autoplay=1&mute=1&controls=0&disablekb=1&loop=1&modestbranding=1&fs=0&showinfo=0&enablejsapi=1" frameborder="0"></iframe>
+						<iframe id="player" type="text/html" width="640" height="390" src="http://www.youtube.com/embed/<?php echo get_theme_mod( 'ta_yt_vid' ); ?>?rel=0&autoplay=1&mute=1&controls=0&disablekb=1&loop=1&modestbranding=1&fs=0&showinfo=0&loop=1&playlist=<?php echo get_theme_mod( 'ta_yt_vid' ); ?>&enablejsapi=1" frameborder="0"></iframe>
 						<?php
+							}
 							}
 						?>
 					</div>
-					<div class="row expanded site-info align-middle">
+					<div class="row site-info align-middle">
 						<div class="small-12 columns text-center">
 							<a href="<?php echo get_bloginfo( 'url' ); ?>"><img src="<?php echo get_theme_mod( 'ta_logo' ); ?>" alt="<?php echo get_bloginfo( 'name' ); ?>" class="animated fadeInUp"></a>
-							<h2 class="site-tagline animated fadeInDown"><?php echo get_theme_mod( 'ta_tagline' ); ?></h2>
+							<h3 class="site-tagline animated fadeInDown"><?php echo get_theme_mod( 'ta_tagline' ); ?></h3>
 						</div>
 					</div>
 					<a href="#content" class="menu-scroll-down"><i class="fa fa-arrow-down" aria-hidden="true"></i></a>
@@ -132,12 +136,12 @@
 				<header id="header" class="site-header" role="banner">
 					<?php $dl = get_post_meta($post->ID, '_dl_dl', true); ?>
 					<?php
-						if( is_page( 'Contact' ) ){
+						if( is_page( 'Contact Us' ) ){
 					?>
 					<div class="row align-middle serviceTop">
-						<div class="small-12 text-center">
-							<h4 class="page-header animated fadeInUp <?php echo $dl; ?>"><?php the_title(); ?></h4>
-							<h3 class="page-tagline animated fadeInDown <?php echo $dl; ?>"><?php $tagline = get_post_meta($post->ID, '_page_tag', true); echo $tagline; ?></h3>
+						<div class="small-12 columns text-center">
+							<h3 class="page-header animated fadeInUp <?php echo $dl; ?>"><?php the_title(); ?></h3>
+							<h5 class="page-tagline animated fadeInDown <?php echo $dl; ?>"><?php $tagline = get_post_meta($post->ID, '_page_tag', true); echo $tagline; ?></h5>
 						</div>
 					</div>
 					<?php
@@ -146,6 +150,7 @@
 					<div class="bg">
 						<div class="pageImage" style="background: url(<?php echo get_the_post_thumbnail_url( $post->ID, 'bg' ); ?>); background-position: center center; background-repeat: no-repeat; background-size: cover; background-attachment: fixed;">
 						<?php
+							if( $detect->isMobile() && !$detect->isTablet() ){} else {
 							$video = get_post_meta($post->ID, '_page_video', true);
 							if( $video != '' ) {
 						?>
@@ -154,11 +159,12 @@
 						</video>
 						<?php
 							}
+							}
 						?>
 							<div class="row align-middle">
-								<div class="small-12 text-center">
-									<h4 class="page-header animated fadeInUp <?php echo $dl; ?>"><?php the_title(); ?></h4>
-									<h3 class="page-tagline animated fadeInDown <?php echo $dl; ?>"><?php $tagline = get_post_meta($post->ID, '_page_tag', true); echo $tagline; ?></h3>
+								<div class="small-12 columns text-center">
+									<h3 class="page-header animated fadeInUp <?php echo $dl; ?>"><?php the_title(); ?></h3>
+									<h5 class="page-tagline animated fadeInDown <?php echo $dl; ?>"><?php $tagline = get_post_meta($post->ID, '_page_tag', true); echo $tagline; ?></h5>
 								</div>
 							</div>
 						</div>
@@ -169,10 +175,24 @@
 					<?php
 						if( is_post_type_archive( 'services' ) ){
 					?>
-					<div class="row align-middle serviceTop">
-						<div class="small-12 text-center">
-							<h4 class="page-header animated fadeInUp"><?php echo post_type_archive_title(); ?></h4>
-							<h3 class="page-tagline animated fadeInDown"><?php echo get_theme_mod( 'ta_post' ); ?></h3>
+					<div class="pageImage" style="background: url(<?php echo get_theme_mod( 'ta_bg' ); ?>); background-position: center center; background-repeat: no-repeat; background-size: cover; background-attachment: fixed;">
+						<?php
+							$video = get_theme_mod( 'ta_services_vid' );
+							if( $video != '' ) {
+						?>
+						<video poster="<?php echo get_theme_mod( 'ta_bg' ); ?>" autoplay="autoplay" preload="metadata" loop="loop" muted="muted" controls="none" id="headerVid">
+							<source src="<?php echo wp_get_attachment_url(get_theme_mod( 'ta_services_vid' )); ?>" type="video/mp4" />
+						</video>
+						<?php
+							}
+						?>
+						<div class="overlay">
+							<div class="row align-middle">
+								<div class="small-12 columns text-center">
+									<h3 class="page-header animated fadeInUp on"><?php echo post_type_archive_title(); ?></h3>
+									<h5 class="page-tagline animated fadeInDown on"><?php echo get_theme_mod( 'ta_post' ); ?></h5>
+								</div>
+							</div>
 						</div>
 					</div>
 					<?php
@@ -182,9 +202,9 @@
 						if( is_post_type_archive( 'team' ) ){
 					?>
 					<div class="row align-middle serviceTop">
-						<div class="small-12 text-center">
-							<h4 class="page-header animated fadeInUp"><?php echo post_type_archive_title(); ?></h4>
-							<h3 class="page-tagline animated fadeInDown"><?php echo get_theme_mod( 'ta_teamtag' ); ?></h3>
+						<div class="small-12 columns text-center">
+							<h3 class="page-header animated fadeInUp"><?php echo post_type_archive_title(); ?></h3>
+							<h5 class="page-tagline animated fadeInDown"><?php echo get_theme_mod( 'ta_teamtag' ); ?></h5>
 						</div>
 					</div>
 					<?php
@@ -194,9 +214,9 @@
 						if( is_category() ){
 					?>
 					<div class="row align-middle serviceTop">
-						<div class="small-12 text-center">
-							<h4 class="page-header animated fadeInUp"><?php single_cat_title(); ?></h4>
-							<h3 class="page-tagline animated fadeInDown"><?php echo category_description(); ?> </h3>
+						<div class="small-12 columns text-center">
+							<h3 class="page-header animated fadeInUp"><?php single_cat_title(); ?></h3>
+							<h5 class="page-tagline animated fadeInDown"><?php echo category_description(); ?></h5>
 						</div>
 					</div>
 					<?php
@@ -206,10 +226,10 @@
 						if( is_home() ){
 					?>
 					<div class="row align-middle serviceTop">
-							<div class="small-12 text-center">
-								<h4 class="page-header animated fadeInUp"><?php echo get_theme_mod( 'ta_blog_title' ); ?></h4>
-								<h3 class="page-tagline animated fadeInDown"><?php echo get_theme_mod( 'ta_blog_tagline' ); ?></h3>
-							</div>
+						<div class="small-12 columns text-center">
+							<h3 class="page-header animated fadeInUp"><?php echo get_theme_mod( 'ta_blog_title' ); ?></h3>
+							<h5 class="page-tagline animated fadeInDown"><?php echo get_theme_mod( 'ta_blog_tagline' ); ?></h5>
+						</div>
 					</div>
 					<?php
 						}
@@ -218,10 +238,22 @@
 						if( 'services' == get_post_type() && is_singular( 'services' ) ){
 					?>
 					<div class="pageImage" style="background: url(<?php echo get_the_post_thumbnail_url( $post->ID, 'bg' ); ?>); background-position: center center; background-repeat: no-repeat; background-size: cover; background-attachment: fixed;">
+						<?php
+							if( $detect->isMobile() && !$detect->isTablet() ){} else {
+							$video = get_post_meta( $post->ID, '_service_vid', true );
+							if( $video != '' ) {
+						?>
+						<video poster="<?php echo get_the_post_thumbnail_url( $post->ID, 'bg' ); ?>" autoplay="autoplay" preload="metadata" loop="loop" muted="muted" controls="none" id="headerVid">
+							<source src="<?php echo $video; ?>" type="video/mp4" />
+						</video>
+						<?php
+							}
+							}
+						?>
 							<div class="row align-middle">
-								<div class="small-12 text-center">
+								<div class="small-12 columns text-center">
 									<h3 class="page-header animated fadeInUp <?php echo $dl; ?>"><?php the_title(); ?></h3>
-									<h4 class="page-tagline animated fadeInDown <?php echo $dl; ?>"><?php $tagline = get_post_meta($post->ID, '_service_tag', true); echo $tagline; ?></h4>
+									<h5 class="page-tagline animated fadeInDown <?php echo $dl; ?>"><?php $tagline = get_post_meta($post->ID, '_service_tag', true); echo $tagline; ?></h5>
 								</div>
 							</div>
 					</div>
@@ -232,12 +264,12 @@
 						if( 'team' == get_post_type() && is_singular( 'team' ) ){
 					?>
 					<div class="pageImage" style="background: url(<?php echo get_the_post_thumbnail_url( $post->ID, 'bg' ); ?>); background-position: center center; background-repeat: no-repeat; background-size: cover; background-attachment: fixed;">
-							<div class="row align-middle">
-								<div class="small-12 text-center">
-									<h4 class="page-header animated fadeInUp <?php echo $dl; ?>"><?php the_title(); ?></h4>
-									<h3 class="page-tagline animated fadeInDown <?php echo $dl; ?>"><?php $tagline = get_post_meta($post->ID, '_team_tag', true); echo $tagline; ?></h3>
-								</div>
+						<div class="row align-middle">
+							<div class="small-12 columns text-center">
+								<h3 class="page-header animated fadeInUp <?php echo $dl; ?>"><?php the_title(); ?></h3>
+								<h5 class="page-tagline animated fadeInDown <?php echo $dl; ?>"><?php $tagline = get_post_meta($post->ID, '_team_tag', true); echo $tagline; ?></h5>
 							</div>
+						</div>
 					</div>
 					<?php
 						}
@@ -247,9 +279,9 @@
 					?>
 					<div class="pageImage" style="background: url(<?php echo get_the_post_thumbnail_url( $post->ID, 'bg' ); ?>); background-position: center center; background-repeat: no-repeat; background-size: cover; background-attachment: fixed;">
 						<div class="row align-middle">
-							<div class="small-12 text-center">
-								<h4 class="page-header animated fadeInUp <?php echo $dl; ?>"><?php the_title(); ?></h4>
-								<h3 class="page-tagline animated fadeInDown <?php echo $dl; ?>"><?php the_category( ', ' ); ?></h3>
+							<div class="small-12 columns text-center">
+								<h3 class="page-header animated fadeInUp <?php echo $dl; ?>"><?php the_title(); ?></h3>
+								<h5 class="page-tagline animated fadeInDown <?php echo $dl; ?>"><?php the_category( ', ' ); ?></h5>
 							</div>
 						</div>
 					</div>
@@ -260,10 +292,10 @@
 						if( is_404() ){
 					?>
 					<div class="row align-middle serviceTop">
-							<div class="small-12 text-center">
-								<h4 class="page-header animated fadeInUp <?php echo $dl; ?>"><?php echo get_theme_mod( 'ta_404title' ); ?></h4>
-								<h3 class="page-tagline animated fadeInDown <?php echo $dl; ?>"><?php echo get_theme_mod( 'ta_404tagline' ); ?></h3>
-							</div>
+						<div class="small-12 columns text-center">
+							<h3 class="page-header animated fadeInUp <?php echo $dl; ?>"><?php echo get_theme_mod( 'ta_404title' ); ?></h3>
+							<h5 class="page-tagline animated fadeInDown <?php echo $dl; ?>"><?php echo get_theme_mod( 'ta_404tagline' ); ?></h5>
+						</div>
 					</div>
 					<?php
 						}

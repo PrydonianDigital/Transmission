@@ -64,6 +64,13 @@
 			'settings'			=> 'ta_button_text',
 			'type'				=> 'input',
 		) ) );
+		$wp_customize->add_setting( 'ta_ga' );
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'ta_ga', array(
+			'label'				=> __( 'Google Analytics ID', 'ta' ),
+			'section'			=> 'ta_theme_section',
+			'settings'			=> 'ta_ga',
+			'type'				=> 'input',
+		) ) );
 
 		$wp_customize->add_section( 'ta_blog_section' , array(
 			'title'				=> __( 'Insights', 'ta' ),
@@ -97,6 +104,13 @@
 			'label'				=> __( 'Services Background', 'ta' ),
 			'section'    => 'ta_bg_section',
 			'settings'   => 'ta_bg',
+			'context'    => 'your_setting_context'
+		) ) );
+		$wp_customize->add_setting( 'ta_services_vid' );
+		$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'ta_services_vid', array(
+			'label'				=> __( 'Services Header Video', 'ta' ),
+			'section'    => 'ta_bg_section',
+			'settings'   => 'ta_services_vid',
 			'context'    => 'your_setting_context'
 		) ) );
 		$wp_customize->add_setting( 'ta_post' );

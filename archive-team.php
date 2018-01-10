@@ -20,6 +20,7 @@
 			<?php $job = get_post_meta( $post->ID, '_teamInfo_job' ,true ); if( $job != '' ) { ?>
 			<h5><?php echo $job; ?></h5>
 			<?php } ?>
+			<?php the_content(); ?>
 		</div>
 	</div>
 
