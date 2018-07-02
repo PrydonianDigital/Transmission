@@ -11,3 +11,9 @@
 	require_once('functions/post_types.php');
 	require_once('functions/meta.php');
 	require_once('functions/options.php');
+
+	require 'parts/theme-update-checker.php';
+	$MyThemeUpdateChecker = new ThemeUpdateChecker(
+		'transmission-agency',
+		'http://prydonian.digital/wp-update-server/?action=get_metadata&slug=transmission-agency'
+	);
