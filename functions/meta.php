@@ -15,6 +15,28 @@
 			'id'				=> $prefix . 'secondary',
 			'type'				=> 'wysiwyg',
 		) );
+		$carousel = new_cmb2_box( array(
+			'id'				=> 'carousel',
+			'title'				=> 'Carousel',
+			'object_types'		=> array( 'page', ),
+			'show_on'			=> array( 'key' => 'page-template', 'value' => 'front-page.php' ),
+			'show_in_rest'		=> true,
+		) );
+		$carousel_group = $carousel->add_field( array(
+			'id'			=> $prefix . 'carousel',
+			'type'			=> 'group',
+			'options'	 	=> array(
+				'group_title'	=> __( 'Carousel {#}', 'mh' ),
+				'add_button'	=> __( 'Add New Carousel', 'mh' ),
+				'remove_button'	=> __( 'Remove Carousel', 'mh' ),
+				'sortable'		=> true,
+			),
+		) );
+		$carousel->add_group_field( $carousel_group, array(
+			'name'			=> 'Image',
+			'id'			=> $prefix . 'img',
+			'type'			=> 'file',
+		) );
 		$links = new_cmb2_box( array(
 			'id'				=> 'links',
 			'title'				=> 'Links',
@@ -1038,6 +1060,11 @@
 			'id'				=> $prefix . 'author',
 			'type'				=> 'select',
 			'options_cb'		=> 'att_link',
+		) );
+		$icons->add_field( array(
+			'id'				=> $prefix . 'noauthor',
+			'desc'				=> 'Check for no author',
+			'type'				=> 'checkbox',
 		) );
 	}
 

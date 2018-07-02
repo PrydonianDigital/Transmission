@@ -4,6 +4,7 @@
 	function ta_theme()  {
 		add_theme_support( 'post-thumbnails' );
 		add_image_size( 'bg', 1680, 900, array( 'center', 'center') );
+		add_image_size( 'carousel', 1680, 389, array( 'center', 'center') );
 		add_image_size( 'insight', 500, 250, array( 'center', 'center') );
 		add_image_size( 'wwww', 840, 580, array( 'center', 'center') );
 		add_image_size( 'sub', 550, 550, array( 'center', 'center') );
@@ -31,10 +32,14 @@
 	function ta_css() {
 		wp_register_style( 'grid', get_template_directory_uri() . '/css/foundation.min.css', false, '6.3.1' );
 		wp_register_style( 'transmission', get_template_directory_uri() . '/css/transmission.css', false, '6.3.1' );
+		wp_register_style( 'owl', get_template_directory_uri() . '/css/owl.css', false, '2.3.3' );
+		wp_register_style( 'owltheme', get_template_directory_uri() . '/css/owl.theme.css', false, '2.3.3' );
 		wp_register_style( 'animate', '//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css', false, '6.3.1' );
 		wp_register_style( 'mi', '//fonts.googleapis.com/icon?family=Material+Icons', false, '6.3.1' );
 		wp_enqueue_style( 'grid' );
 		wp_enqueue_style( 'transmission' );
+		wp_enqueue_style( 'owl' );
+		wp_enqueue_style( 'owltheme' );
 		wp_enqueue_style( 'animate' );
 		wp_enqueue_style( 'mi' );
 		wp_enqueue_style( 'wp-mediaelement' );
@@ -50,6 +55,7 @@
 		wp_enqueue_script( 'TM', get_template_directory_uri() . '/js/plugins/TweenMax.min.js', false, '1', true );
 		wp_enqueue_script( 'AG', get_template_directory_uri() . '/js/plugins/animation.gsap.min.js', false, '1', true );
 		wp_enqueue_script( 'SVG', get_template_directory_uri() . '/js/plugins/DrawSVGPlugin.min.js', false, '1', true );
+		wp_enqueue_script( 'owljs', get_template_directory_uri() . '/js/vendor/owl.js', false, '2.3.3', true );
 		wp_enqueue_script( 'ta', get_template_directory_uri() . '/js/transmission.js', false, '1.5', true );
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_script( 'what' );
@@ -61,6 +67,7 @@
 		wp_enqueue_script( 'SVG' );
 		wp_enqueue_script( 'wp-mediaelement' );
 		wp_enqueue_script( 'mediaelement-vimeo' );
+		wp_enqueue_script( 'owljs' );
 		wp_enqueue_script( 'ta' );
 	}
 	add_action( 'wp_enqueue_scripts', 'ta_js' );

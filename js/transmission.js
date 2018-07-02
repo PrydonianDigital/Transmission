@@ -4,13 +4,26 @@ jQuery(function() {
 
 	//jQuery( 'video,audio' ).mediaelementplayer();
 
-	if(element_exists( '#headerVid' )) {
-		var canPlay = false;
-		var v = document.createElement( 'video' );
-		if(v.canPlayType && v.canPlayType( 'video/mp4' ).replace(/no/, '' )) {
-			canPlay = true;
-		}
-		$( '#headerVid' )[0].play();
+	if(element_exists( '#owl' )) {
+		jQuery('.owl-carousel').owlCarousel({
+			nav: false,
+			dots: false,
+			loop: true,
+			responsiveClass: true,
+			lazyLoad: false,
+			animateOut: 'fadeOut',
+			animateIn:	'fadeIn',
+			autoplay: true,
+			autoplayTimeout: 3500,
+			smartSpeed: 500,
+			autoplayHoverPause: false,
+			responsive: {
+				0: {
+					items:	1,
+					nav: true
+				}
+			}
+		});
 	}
 
 	if(element_exists( '#map' )) {

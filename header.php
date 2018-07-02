@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php ?>
+<?php
+
+
+?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
@@ -26,6 +30,7 @@
 	require_once 'Mobile_Detect.php';
 	$detect = new Mobile_Detect;
 ?>
+	<meta name="google-site-verification" content="ChZoOfX7wqzifcYmSOip9Zgq0erVx_M_1_ncN0lKeuY" />
 </head>
 
 <body <?php body_class(); ?>>
@@ -60,23 +65,7 @@
 				?>
 				<header id="homeHeader" class="site-header" role="banner">
 					<div class="wp-custom-header">
-						<img src="<?php echo get_theme_mod( 'ta_header_img' ); ?>" />
-						<?php
-							if( $detect->isMobile() && !$detect->isTablet() ){} else {
-							if( get_theme_mod( 'ta_header_video' ) != '' ) {
-						?>
-						<video poster="<?php echo get_theme_mod( 'ta_header_img' ); ?>" autoplay="autoplay" preload="metadata" loop="loop" muted="muted" controls="none" id="headerVid">
-							<source src="<?php echo wp_get_attachment_url(get_theme_mod( 'ta_header_video' )); ?>" type="video/mp4" />
-						</video>
-						<?php
-							}
-							if( get_theme_mod( 'ta_yt_vid' ) != '' ) {
-						?>
-						<iframe id="player" type="text/html" width="640" height="390" src="http://www.youtube.com/embed/<?php echo get_theme_mod( 'ta_yt_vid' ); ?>?rel=0&autoplay=1&mute=1&controls=0&disablekb=1&loop=1&modestbranding=1&fs=0&showinfo=0&loop=1&playlist=<?php echo get_theme_mod( 'ta_yt_vid' ); ?>&enablejsapi=1" frameborder="0"></iframe>
-						<?php
-							}
-							}
-						?>
+						<?php get_template_part( 'parts/home', 'carousel' ); ?>
 					</div>
 					<div class="row site-info align-middle">
 						<div class="small-12 columns text-center">

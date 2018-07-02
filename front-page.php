@@ -46,33 +46,6 @@
 	</div>
 </div>
 
-<?php
-	$args = array(
-		'post_type'			=> 'clients',
-		'posts_per_page'	=> -1
-	);
-	$clients = new WP_Query( $args );
-?>
-<?php if ($clients->have_posts()) :
-?>
-<div class="ourClients">
-	<div class="row" id="clients">
-		<div class="small-12 columns text-center">
-			<h4>Clients</h4>
-		</div>
-	</div>
-	<div class="row small-up-1 medium-up-3 align-center" id="clients">
-		<?php
-			while ($clients->have_posts()) : $clients->the_post();
-		?>
-		<div class="column text-center">
-			<?php the_post_thumbnail( 'client' ); ?>
-		</div>
-		<?php endwhile; ?>
-	</div>
-</div>
-<?php endif; wp_reset_postdata(); ?>
-
 <div class="row">
 	<div class="small-12 medium-8 medium-offset-2 columns">
 <div class="row small-up-1 medium-up-3 align-middle">
@@ -100,5 +73,47 @@
 	</div>
 
 </div>
+
+<?php
+	$args = array(
+		'post_type'			=> 'clients',
+		'posts_per_page'	=> -1
+	);
+	$clients = new WP_Query( $args );
+?>
+<?php if ($clients->have_posts()) :
+?>
+<div class="ourClients">
+	<div class="row" id="clients">
+		<div class="small-12 columns text-center">
+			<h4>Our Clients</h4>
+		</div>
+	</div>
+	<div class="row small-up-1 medium-up-4 align-middle align-center" id="clients">
+		<?php
+			while ($clients->have_posts()) : $clients->the_post();
+			$url = get_post_meta( $post->ID, '_client_url', true );
+		?>
+		<div class="column text-center">
+			<?php
+				if( $url !='' ) {
+			?>
+			<a href="<?php echo $url; ?>" target="_blank">
+			<?php
+				}
+			?>
+			<?php the_post_thumbnail( 'client' ); ?>
+			<?php
+				if( $url !='' ) {
+			?>
+			</a>
+			<?php
+				}
+			?>
+		</div>
+		<?php endwhile; ?>
+	</div>
+</div>
+<?php endif; wp_reset_postdata(); ?>
 
 <?php get_footer(); ?>

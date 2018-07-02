@@ -1,8 +1,9 @@
 /*
-Theme Name: Transmission Agency
+Theme Name: Transmission Agency Child Theme
+Template: transmission-agency
 Theme URI: https://www.transmissionagency.com
 Description: Wordpress theme for Transmission.
-Version: 1.1
+Version: 1.2
 Author: Prydonian Digital
 Author URI: http://prydonian.digital
 Tags:
@@ -26,9 +27,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 header#homeHeader {
 	width: 100%;
-	height: calc(100vh - 54px);
+	height: 389px;
 	position: relative;
-	text-transform: uppercase;
 }
 header#homeHeader h3 {
 	color: #fff;
@@ -68,43 +68,27 @@ header#header {
 	padding-top: 0;
 }
 .wp-custom-header {
-	width: 100%;
-	height: 100vh;
+	width: 100vw;
+	height: 389px;
 	position: fixed;
 	z-index: -1;
 }
-.wp-custom-header iframe,
-.wp-custom-header video,
-.wp-custom-header img,
-.wp-custom-header .wp-video {
-	position: fixed;
-	height: auto;
-	left: 50%;
-	max-width: 1000%;
-	min-height: 100%;
-	min-width: 150%;
-	min-width: 150vw; /* vw prevents 1px gap on left that 100% has */
-	width: auto;
-	top: 48%;
-	padding-bottom: 1px; /* Prevent header from extending beyond the footer */
-	-ms-transform: translateX(-50%) translateY(-50%);
-	-moz-transform: translateX(-50%) translateY(-50%);
-	-webkit-transform: translateX(-50%) translateY(-50%);
-	transform: translateX(-50%) translateY(-50%);
+.wp-custom-header #owl {
+	width: 100% !important;
+	height: 389px;
+}
+.owl-nav, .owl-dots {
+	display: none !important;
+}
+.owl-stage-outer, .owl-stage {
+	height: 389px;
+	overflow: hidden;
+}
+.owl-item img {
+	width: 100%;
+	height: 389px;
 }
 
-@media screen and (max-device-width: 1367px) and (-webkit-min-device-pixel-ratio: 2) {
-	.wp-custom-header iframe,
-	.wp-custom-header video,
-	.wp-custom-header img,
-	.wp-custom-header .wp-video {
-		max-width: 300%;
-		min-height: 100%;
-		min-width: 125%;
-		min-width: 125vw; /* vw prevents 1px gap on left that 100% has */
-		width: auto;
-	}
-}
 .title-bar {
 	position: fixed;
 	top: 0;
@@ -471,7 +455,7 @@ a:hover {
 }
 @media screen and (max-width: 769px) {
 	header {
-		margin-top: 53px;
+		margin-top: 32px;
 	}
 	.services {
 		background-size: cover !important;
@@ -594,12 +578,18 @@ a:hover {
 }
 .ourClients {
 	margin-top: 0rem;
-	margin-bottom: 4rem;
-	background: #e7e7e7;
+	margin-bottom: 0rem;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	background: #02cdd1;
 }
 .ourClients h4 {
-	color: #4f535e;
-	padding-top: 1rem;
+	color: #ffffff;
+	padding-top: 0;
+	text-transform: uppercase;
+}
+#clients .column {
+	padding: 0.9375rem;
 }
 #team {
 	margin-top: 3rem;
@@ -769,7 +759,12 @@ a:hover {
 h1.icon {
 	margin-top: 4rem;
 }
-
+.single-post .hentry a {
+	color: #00CED1 !important;
+	text-decoration: underline !important;
+	display: inline;
+	word-break: break-all;
+}
 #tabs {
 	margin-top: 4rem;
 }
