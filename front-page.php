@@ -89,7 +89,7 @@
 			<h4>Our Clients</h4>
 		</div>
 	</div>
-	<div class="row small-up-1 medium-up-4 align-middle align-center" id="clients">
+	<div class="row align-middle align-center" id="clients">
 		<?php
 			while ($clients->have_posts()) : $clients->the_post();
 			$url = get_post_meta( $post->ID, '_client_url', true );
@@ -102,7 +102,7 @@
 			<?php
 				}
 			?>
-			<?php the_post_thumbnail( 'client' ); ?>
+			<?php the_post_thumbnail( 'full' ); ?>
 			<?php
 				if( $url !='' ) {
 			?>
