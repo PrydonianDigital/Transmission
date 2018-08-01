@@ -2,7 +2,7 @@
 Theme Name: Transmission Agency
 Theme URI: https://www.transmissionagency.com
 Description: Wordpress theme for Transmission.
-Version: 1.2
+Version: 1.3
 Author: Prydonian Digital
 Author URI: http://prydonian.digital
 Tags:
@@ -10,7 +10,6 @@ License: Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported Licens
 License URI: http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en_US
 Text Domain: ta
 */
-
 
 @import url('https://rsms.me/inter/inter-ui.css');
 body {
