@@ -836,7 +836,7 @@ body .gform_wrapper .top_label div.ginput_container {
 #getInTouch {
 	position: relative;
 	z-index: 100;
-	margin-top: 1em;
+	margin-top: 2em;
 }
 #getInTouch a {
 	display: block;
