@@ -10,20 +10,22 @@
 	<div class="small-12 medium-10 medium-offset-1 columns text-center">
 
 		<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "WebSite",
-  "url": "<?php the_permalink(); ?>",
-  "name": "<?php the_title(); ?>",
-   "author": {
-      "@type": "Person",
-      "name": "<?php the_author_meta('display_name'); ?>"
-    },
-  "description": "<?php the_excerpt(); ?>",
-  "publisher": "<?php bloginfo('title'); ?>"
-}
-</script>
+
+			<script type="application/ld+json">
+			{
+			  "@context": "http://schema.org",
+			  "@type": "WebSite",
+			  "url": "<?php the_permalink(); ?>",
+			  "name": "<?php the_title(); ?>",
+			   "author": {
+			      "@type": "Person",
+			      "name": "<?php the_author_meta('display_name'); ?>"
+			    },
+			  "description": "<?php the_excerpt(); ?>",
+			  "publisher": "<?php bloginfo('title'); ?>"
+			}
+			</script>
+
 			<?php the_content(); ?>
 
 <div class="blogPosts">
