@@ -28,6 +28,14 @@
 
 			<?php the_content(); ?>
 
+		<?php endwhile; ?>
+
+		<?php endif; ?>
+
+	</div>
+
+</div>
+
 <div class="blogPosts">
 
 <div class="row small-up-1 medium-up-2 align-top">
@@ -66,15 +74,5 @@
 </div>
 
 </div>
-
-		<?php endwhile; ?>
-
-		<?php endif; ?>
-
-	</div>
-
-</div>
-
-
 
 <?php get_footer(); ?>
